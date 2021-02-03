@@ -23,6 +23,7 @@ public class QrCodeController {
     private String baseImgUrl = "http://baidu.com/updateTokenState?token=";
 
     @RequestMapping("/generateQrCode")
+    @ResponseBody
     public String generateQrCode() throws Exception {
         //TODO token用时间戳和随机码的MD5
         String token = UUID.randomUUID().toString().replace("-", "");
@@ -47,7 +48,7 @@ public class QrCodeController {
      * @return
      * @throws IOException
      */
-    @RequestMapping("/generateQrCodeImg")
+    @RequestMapping(value = "generateQrCodeImg",produces = MediaType.IMAGE_GIF_VALUE)
     public byte[] getQrCodeImg(@RequestParam String token) throws IOException {
         File file = new File("D:/code/img/" + token + ".png");
         FileInputStream inputStream = new FileInputStream(file);
